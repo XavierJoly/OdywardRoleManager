@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:_0900_OdywardRoleManager.ViewModels.Dialogs"
+        x:Class="_0900_OdywardRoleManager.Views.Dialogs.SummaryDialog"
+        x:DataType="vm:SummaryDialogViewModel"
+        Width="480"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        Title="Résumé des attributions">
+    <StackPanel Margin="24" Spacing="16">
+        <TextBlock Text="Résumé des rôles à attribuer" FontSize="18" FontWeight="SemiBold"/>
+        <TextBlock Text="{Binding Email}" FontStyle="Italic" Opacity="0.8"/>
+        <StackPanel Orientation="Horizontal" Spacing="24">
+            <StackPanel Width="200">
+                <TextBlock Text="Rôles existants" FontWeight="SemiBold"/>
+                <ItemsControl ItemsSource="{Binding CurrentRoles}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="•  {Binding}" Margin="0,2,0,0"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            <StackPanel Width="200">
+                <TextBlock Text="Rôles à attribuer" FontWeight="SemiBold"/>
+                <ItemsControl ItemsSource="{Binding RolesToAssign}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="•  {Binding}" Margin="0,2,0,0"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
+            <Button Content="Annuler" Name="CancelButton" MinWidth="100"/>
+            <Button Content="Confirmer" Name="ConfirmButton" MinWidth="120"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

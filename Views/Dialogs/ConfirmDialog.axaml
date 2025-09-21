@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:_0900_OdywardRoleManager.ViewModels.Dialogs"
+        x:Class="_0900_OdywardRoleManager.Views.Dialogs.ConfirmDialog"
+        x:DataType="vm:ConfirmDialogViewModel"
+        Width="400"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        Title="Confirmation"
+        mc:Ignorable="d">
+    <StackPanel Margin="24" Spacing="16">
+        <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="SemiBold"/>
+        <TextBlock Text="{Binding Message}" TextWrapping="Wrap"/>
+        <ItemsControl ItemsSource="{Binding Items}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="•  {Binding}" Margin="0,2,0,0"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
+            <Button Content="Annuler" Name="CancelButton" MinWidth="100"/>
+            <Button Content="Confirmer" Name="ConfirmButton" MinWidth="120"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

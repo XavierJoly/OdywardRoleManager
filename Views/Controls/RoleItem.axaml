@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:_0900_OdywardRoleManager.ViewModels"
+             x:Class="_0900_OdywardRoleManager.Views.Controls.RoleItem"
+             x:DataType="vm:RoleItemViewModel">
+    <Border CornerRadius="8" Padding="12" Margin="0 4" Classes="RoleItem">
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+            <CheckBox VerticalAlignment="Center"
+                      IsChecked="{Binding IsSelected, Mode=TwoWay}"/>
+            <StackPanel>
+                <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" FontSize="16"/>
+                <TextBlock Text="{Binding Description}"
+                           Margin="0,2,0,0"
+                           FontSize="12"
+                           Foreground="{DynamicResource SubtleForegroundBrush}"/>
+                <TextBlock Text="{Binding Status}"
+                           Margin="0,6,0,0"
+                           FontSize="12"
+                           Foreground="{DynamicResource AccentBrush}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

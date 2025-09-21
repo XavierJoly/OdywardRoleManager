@@ -1,0 +1,96 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="using:_0900_OdywardRoleManager.Views.Controls"
+        xmlns:vm="using:_0900_OdywardRoleManager.ViewModels"
+        x:Class="_0900_OdywardRoleManager.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Width="1000"
+        Height="700"
+        MinWidth="900"
+        MinHeight="600"
+        Icon="avares://_0900_OdywardRoleManager/Assets/avalonia-logo.ico"
+        Title="Odyward Role Manager"
+        mc:Ignorable="d">
+    <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*">
+        <Border Grid.Row="0" Padding="24" Background="{DynamicResource SystemControlBackgroundBaseHighBrush}">
+            <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="16" VerticalAlignment="Center">
+                <Image Source="avares://_0900_OdywardRoleManager/Assets/avalonia-logo.ico"
+                       Width="32" Height="32"/>
+                <TextBlock Text="Odyward Role Manager"
+                           VerticalAlignment="Center"
+                           FontSize="24"
+                           FontWeight="SemiBold"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
+                    <TextBlock Text="Thème sombre" VerticalAlignment="Center"/>
+                    <ToggleSwitch Name="ThemeToggle" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Padding="24" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                <StackPanel Spacing="8">
+                    <TextBlock Text="Adresse e-mail utilisateur"/>
+                    <TextBox Text="{Binding EmailInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Watermark="user@domain.com"/>
+                    <StackPanel Orientation="Horizontal" Spacing="24">
+                        <TextBlock Text="Tenant" FontWeight="SemiBold"/>
+                        <TextBlock Text="{Binding TenantId}"/>
+                        <TextBlock Text="Compte" FontWeight="SemiBold" Margin="24,0,0,0"/>
+                        <TextBlock Text="{Binding CurrentUserPrincipalName}"/>
+                    </StackPanel>
+                </StackPanel>
+                <Button Content="Voir rôles attribués"
+                        Command="{Binding LoadRolesCommand}"
+                        VerticalAlignment="Bottom"
+                        MinWidth="200"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2" Padding="24">
+            <Grid ColumnDefinitions="2*,*" ColumnSpacing="24">
+                <Border Padding="16" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}" CornerRadius="12">
+                <Grid RowDefinitions="Auto,* ,Auto" RowSpacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBlock Text="Gestion des rôles" FontSize="20" FontWeight="SemiBold"/>
+                        <ProgressBar Grid.Column="1" Width="160" IsVisible="{Binding IsBusy}" IsIndeterminate="True"/>
+                    </Grid>
+                    <ScrollViewer Grid.Row="1">
+                        <ItemsControl ItemsSource="{Binding Roles}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:RoleItem/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
+                        <Button Content="Attribuer rôles sélectionnés" Command="{Binding AssignSelectedRolesCommand}" MinWidth="220"/>
+                        <Button Content="Révoquer rôles sélectionnés" Command="{Binding RevokeSelectedRolesCommand}" MinWidth="220"/>
+                        <Button Content="Rollback" Command="{Binding RollbackCommand}" MinWidth="120"/>
+                    </StackPanel>
+                </Grid>
+                </Border>
+
+                <Border Grid.Column="1" Padding="16" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}" CornerRadius="12">
+                <Grid RowDefinitions="Auto,* ,Auto" RowSpacing="12">
+                    <TextBlock Text="Journal" FontSize="20" FontWeight="SemiBold"/>
+                    <ListBox Grid.Row="1"
+                             ItemsSource="{Binding ActivityLog}"/>
+                    <Button Grid.Row="2"
+                            Content="Exporter en JSON"
+                            Command="{Binding ExportAuditCommand}"
+                            HorizontalAlignment="Right"
+                            MinWidth="160"/>
+                </Grid>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="3" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}" Padding="16">
+            <TextBlock Text="{Binding StatusMessage}" FontStyle="Italic"/>
+        </Border>
+    </Grid>
+</Window>
