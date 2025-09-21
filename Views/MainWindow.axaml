@@ -10,13 +10,13 @@
         Height="700"
         MinWidth="900"
         MinHeight="600"
-        Icon="avares://_0900_OdywardRoleManager/Assets/avalonia-logo.ico"
+    Icon="avares://0900_OdywardRoleManager/Assets/avalonia-logo.ico"
         Title="Odyward Role Manager"
         mc:Ignorable="d">
     <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*">
         <Border Grid.Row="0" Padding="24" Background="{DynamicResource SystemControlBackgroundBaseHighBrush}">
             <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="16" VerticalAlignment="Center">
-                <Image Source="avares://_0900_OdywardRoleManager/Assets/avalonia-logo.ico"
+          <Image Source="avares://0900_OdywardRoleManager/Assets/avalonia-logo.ico"
                        Width="32" Height="32"/>
                 <TextBlock Text="Odyward Role Manager"
                            VerticalAlignment="Center"
